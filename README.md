@@ -1,14 +1,15 @@
 # geoCodes-doc
 
 Documentation repository for the `geoCodes` project, built with Docusaurus.
-This README is intended for developers/maintainers and should be updated over time.
+This README is intended for developers and maintainers.
 
 ## Purpose
 
-- Keep geoCodes datasets, contracts, and library usage documented consistently.
+- Keep datasets, contracts, and library usage documentation consistent across the geoCodes ecosystem.
 - Stay aligned with related repositories:
-  - `~/ALIBE/geoCodes-data`
-  - `~/ALIBE/geoCodes-php`
+  - `geoCodes-data`
+  - `geoCodes-php`
+  - additional language-specific implementations as they are introduced
 
 ## Stack
 
@@ -30,34 +31,34 @@ npm run build
 npm run serve
 ```
 
-## Useful Structure
+## Repository Structure
 
 - `docusaurus.config.js`: global site config, plugins, versioning, i18n.
 - `docs/`: main documentation.
-- `docData_versioned_docs/`: versioned docs for the data package.
-- `docPhp_versioned_docs/`: versioned docs for the PHP package.
-- `*_versioned_sidebars/`: sidebars for versioned docs.
+- `docData_versioned_docs/`: versioned documentation for data packages.
+- `docPhp_versioned_docs/`: versioned documentation for PHP packages.
+- `*_versioned_sidebars/`: sidebars for versioned documentation.
 - `src/`, `static/`: theme, CSS, static assets.
-- `AGENTS.md` + `.codex/`: operational notes for agents/tooling.
+- `AGENTS.md` and `.codex/`: internal operational notes for tooling/agents.
 
 ## Working Rules
 
 - Prefer small, localized changes.
-- Avoid unrelated side refactors.
-- If a documented contract changes (fields, payloads, versions), verify impact on `geoCodes-data` and `geoCodes-php`.
-- Do not edit generated folders (`build/`, `.docusaurus/`) unless explicitly needed.
+- Avoid unrelated refactors.
+- If documented contracts change (fields, payloads, versions), verify cross-repo impact.
+- Do not edit generated folders (`build/`, `.docusaurus/`) unless explicitly required.
 
 ## Dependency Security
 
-- Safe, non-breaking fixes were applied via `package-lock.json`.
-- Some transitive vulnerabilities may remain in the Docusaurus bundler chain.
+- Apply non-breaking dependency fixes through `package-lock.json`.
+- Transitive vulnerabilities may remain in the Docusaurus bundler chain.
 - Do not run `npm audit fix --force` without explicit validation.
 
-## Continuous Updates
+## Maintenance
 
-When the project changes, update this README together with:
+When the project evolves, update this README together with:
 
 - operational commands
-- folder structure
+- repository structure
 - relevant technical policies
 - cross-repo references
