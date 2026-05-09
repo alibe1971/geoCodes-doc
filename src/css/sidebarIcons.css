@@ -1,0 +1,125 @@
+/**********/
+/* PRESET */
+/**********/
+.sidebarBadgeIcons.menu__list-item > .menu__link,
+.sidebarIcons > .menu__list-item-collapsible > .menu__link {
+    position: relative;
+}
+
+.sidebarIcons.menu__list-item > .menu__link::before,
+.sidebarIcons > .menu__list-item-collapsible > .menu__link::before {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    font-weight: 900;
+    background-color: rgba(var(--ifm-color-primary-lightest-rgb), 0.1);
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    border-radius:50%;
+    padding-top: 0.15rem;
+    color: var(--ifm-color-primary);
+    font-size: 1rem;
+    text-align: center;
+    content: '';
+}
+
+.sidebarIcons.menu__list-item:has(a.menu__link--active) > .menu__link::before,
+.sidebarIcons > .menu__list-item-collapsible:has(a.menu__link--active) > .menu__link::before {
+    color: #ffffff;
+    background-color: var(--ifm-color-primary);
+}
+
+/*****************/
+/* FONT FAMILIES */
+/*****************/
+.freeIcons,
+.sidebarBadgeIcons.menu__list-item.FA-IconsFree > .menu__link::after,
+.sidebarBadgeIcons.FA-IconsFree > .menu__list-item-collapsible > .menu__link::after,
+.sidebarIcons.menu__list-item.FA-IconsFree > .menu__link::before,
+.sidebarIcons.FA-IconsFree > .menu__list-item-collapsible > .menu__link::before {
+    font-family: 'Font Awesome 6 Free';
+}
+.badgeIcons,
+.sidebarBadgeIcons.menu__list-item.FA-IconsBrands > .menu__link::after,
+.sidebarBadgeIcons.FA-IconsBrands > .menu__list-item-collapsible > .menu__link::after,
+.sidebarIcons.menu__list-item.FA-IconsBrands > .menu__link::before,
+.sidebarIcons.FA-IconsBrands > .menu__list-item-collapsible > .menu__link::before {
+    font-family: 'Font Awesome 6 Brands';
+}
+
+
+/**********/
+/* BADGES */
+/**********/
+.sidebarBadgeIcons.menu__list-item > .menu__link::after,
+.sidebarBadgeIcons > .menu__list-item-collapsible > .menu__link::after {
+    position: absolute;
+    top: 0.3rem;
+    display: inline-block;
+    transform: none !important;
+    line-height: 1rem;
+    font-weight: 900;
+    width: 1.5rem;
+    height: 1rem;
+    border-radius:25%;
+    font-size: 0.8rem;
+    text-align: center;
+    content: '';
+}
+.sidebarBadgeIcons.menu__list-item > .menu__link::after {
+    right: 0.5rem;
+}
+.sidebarBadgeIcons > .menu__list-item-collapsible > .menu__link::after  {
+    right: 0.2rem;
+}
+
+/*NEW*/
+.menu__list-item.sidebarBadgeIcons.badgeNew > .menu__link::after,
+.menu__list-item.sidebarBadgeIcons.badgeNew > .menu__list-item-collapsible > .menu__link::after {
+    background-color: #4CAF50;
+    color: #FFFFFF;
+    content: '\f005';
+}
+/*DEPRECATED*/
+.menu__list-item.sidebarBadgeIcons.badgeDeprecated > .menu__link::after,
+.menu__list-item.sidebarBadgeIcons.badgeDeprecated > .menu__list-item-collapsible > .menu__link::after {
+    background-color: #F44336;
+    color: #FFFFFF;
+    content: '\f071';
+}
+/*STABLE*/
+.menu__list-item.sidebarBadgeIcons.badgeStable > .menu__link::after,
+.menu__list-item.sidebarBadgeIcons.badgeStable > .menu__list-item-collapsible > .menu__link::after {
+    background-color: #2196F3;
+    color: #FFFFFF;
+    content: '\f00c';
+}
+/*PROGRESS*/
+.menu__list-item.sidebarBadgeIcons.badgeProgress > .menu__link::after,
+.menu__list-item.sidebarBadgeIcons.badgeProgress > .menu__list-item-collapsible > .menu__link::after {
+    background-color: #FFEB3B;
+    color: #000000;
+    content: '\f110';
+}
+/*EXPERIMENTAL*/
+.menu__list-item.sidebarBadgeIcons.badgeExperimental > .menu__link::after,
+.menu__list-item.sidebarBadgeIcons.badgeExperimental > .menu__list-item-collapsible > .menu__link::after {
+    background-color: #FF9800;
+    color: #FFFFFF;
+    content: '\f0c3';
+}
+
+
+/*********/
+/* ICONS */
+/*********/
+.menu__list-item.sidebarIcons.sbi-map-signs > .menu__link::before,
+.menu__list-item.sidebarIcons.sbi-map-signs > .menu__list-item-collapsible > .menu__link::before {
+    content: '\f277';
+}
+
+.menu__list-item.sidebarIcons.sbi-php > .menu__link::before,
+.menu__list-item.sidebarIcons.sbi-php > .menu__list-item-collapsible > .menu__link::before {
+    content: '\f457';
+}

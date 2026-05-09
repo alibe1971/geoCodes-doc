@@ -1,0 +1,9 @@
+```js
+{
+  ...
+    "timeZones": [
+        "Europe/Dublin"
+    ],
+  ...
+}
+```

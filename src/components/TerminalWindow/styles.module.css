@@ -1,0 +1,111 @@
+/**
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.terminalWindow {
+  border: 3px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  box-shadow: var(--ifm-global-shadow-lw);
+  margin-bottom: var(--ifm-leading);
+}
+
+.terminalWindowHeader {
+  align-items: center;
+  background: var(--ifm-color-emphasis-200);
+  display: flex;
+  padding: 0.5rem 1rem;
+}
+
+.row::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.buttons {
+  white-space: nowrap;
+}
+
+.right {
+  align-self: center;
+  width: 10%;
+}
+
+[data-theme='light'] {
+  --ifm-background-color: #fff;
+}
+
+.dot {
+  margin-right: 6px;
+  margin-top: 4px;
+  height: 12px;
+  width: 12px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminalWindowTitleBar {
+  flex: 1 0;
+  margin-right: 4rem;
+  text-align: center;
+  display: inline-block;
+  font: 400 0.8rem Arial, sans-serif;
+  user-select: none;
+}
+.titleContainer {
+  display: inline-block;
+  position: relative;
+}
+.backgroundTitle {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  color: var(--ifm-color-gray-600);
+}
+.foregroundTitle {
+  position: relative;
+}
+
+.terminalWindowBody {
+  background-color: var(--ifm-background-color);
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  padding: 1rem;
+}
+
+.terminalWindowBody > *:last-child {
+  margin-bottom: 0;
+}
+
+.terminalWindowBody pre > code {
+  padding-left: 3.2em;
+}
+
+.terminalWindowBody pre > code > span {
+  position: relative;
+}
+
+.terminalWindowBody pre > code > span::before {
+  position: absolute;
+  left: -2.9em;
+  top: -0.1em;
+  color: #4CAF50;
+  font-weight: bold;
+}
+.bashPrompt pre > code > span::before {
+  content: "@:>$";
+}
+.windowsPrompt pre > code > span::before {
+  content: "C:\\>";
+}
+.zshPrompt pre > code > span::before {
+  content: "#@:%";
+}
+.fishPrompt pre > code > span::before {
+  content: "#@:>";
+}
+

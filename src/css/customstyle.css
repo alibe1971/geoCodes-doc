@@ -1,0 +1,140 @@
+/*-------------------*/
+/* TABLE OF CONTENTS */
+/*-------------------*/
+.table-of-contents__left-border {
+    border-left: 2px solid var(--ifm-color-primary);
+}
+.table-of-contents {
+    font-size: 0.8rem;
+}
+table-of-contents__link--active {
+    border-left: 2px solid red !important;
+}
+li:has(a.table-of-contents__link--active)::before {
+    content: "\25B6";
+    color: var(--ifm-color-primary);
+    left: 0;
+    position: absolute;
+}
+
+/*--------*/
+/* TOPBAR */
+/*--------*/
+
+.dropDownSeparator {
+    margin: 10px 0;
+}
+
+.topBarDropDownCategory {
+    font-family: Verdana;
+    color: var(--ifm-color-primary);
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 16px;
+    padding-left: 3px;
+    padding-right: 4px;
+    white-space: nowrap;
+}
+
+.topBarDropDownCategory img {
+    width: 20px;
+    vertical-align:middle;
+}
+
+/*---------*/
+/* SIDEBAR */
+/*---------*/
+.theme-doc-sidebar-menu {
+    font-size: 0.9rem;
+}
+.menu__link  {
+    line-height: 1.7rem;
+}
+.menu__list:not(.theme-doc-sidebar-menu) {
+    padding-left: 1.25rem !important;
+}
+
+.menu__list-item-collapsible:hover,
+.menu__link:hover {
+    background-color: rgba(var(--ifm-color-primary-lightest-rgb), 0.1);
+}
+
+.menu__link--active:not(.menu__link--sublist),
+.menu__list-item-collapsible:has(a.menu__link--active),
+.menu__list-item-collapsible--active {
+    background-color: rgba(var(--ifm-color-primary-lightest-rgb), 0.1);
+}
+.menu__list-item:not(:first-child) {
+    margin-top: 0;
+    padding-top: 0.25rem;
+}
+.menu__list-item:not(.theme-doc-sidebar-item-category) {
+    border-left: 4px solid rgba(var(--ifm-color-primary-lightest-rgb), 0.1);
+}
+.theme-doc-sidebar-item-link-level-1 {
+    border-left: none !important;
+}
+
+.menu__list-item:not(.theme-doc-sidebar-item-category):has(a.menu__link--active) {
+    border-left: 4px solid rgba(var(--ifm-color-primary-lightest-rgb), 1);
+}
+
+
+.sidebarPackageTitle {
+    color: var(--ifm-color-primary-light);
+    font-weight: bold;
+    font-size: larger;
+}
+
+/*---------*/
+/* HEADERS */
+/*---------*/
+
+h1:first-child {
+    color: var(--ifm-color-primary);
+}
+
+h2 {
+    font-size: 2.5em;
+}
+
+h3 {
+    font-size: 2.0em;
+}
+
+h4 {
+    font-size: 1.7em;
+}
+
+h5 {
+    font-size: 1.4em;
+}
+
+h6 {
+    font-size: 1.1em;
+}
+
+/*---------------*/
+/* TABLES HEADER */
+/*---------------*/
+
+table thead {
+    background-color: rgba(var(--ifm-color-primary-lightest-rgb), 0.1);
+}
+
+/*------------*/
+/* Pagination */
+/*------------*/
+.pagination-nav__label {
+    font-size: 1.1rem;
+}
+
+.pagination-nav__sublabel {
+    font-size: 1rem;
+}
+
+
+.admonitionHeading_node_modules-\@docusaurus-theme-classic-lib-theme-Admonition-Layout-styles-module {
+    font-size: 1.0rem !important;
+    text-transform: none !important;
+}

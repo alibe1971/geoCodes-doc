@@ -1,0 +1,10 @@
+```js
+{
+  ...
+    "tags": [
+        "organization",
+        "geopolitics"
+    ],
+  ...
+}
+```

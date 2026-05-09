@@ -1,0 +1,42 @@
+{
+  "title": {
+    "message": "My Site",
+    "description": "The title in the navbar"
+  },
+  "logo.alt": {
+    "message": "My Site Logo",
+    "description": "The alt text of navbar logo"
+  },
+  "item.label.Tutorial": {
+    "message": "Tutore",
+    "description": "Navbar item with label Tutorial"
+  },
+  "item.label.Blog": {
+    "message": "Blog",
+    "description": "Navbar item with label Blog"
+  },
+  "item.label.GitHub": {
+    "message": "GitHub",
+    "description": "Navbar item with label GitHub"
+  },
+  "item.label.External Links": {
+    "message": "Collegamenti Esterni",
+    "description": "Navbar item with label External Links"
+  },
+  "item.label.Website": {
+    "message": "Sito Web",
+    "description": "Navbar item with label Website"
+  },
+  "item.label.Package for Php": {
+    "message": "Pacchetto per Php",
+    "description": "Navbar item with label Pacchetto per Php"
+  },
+  "item.label.Package for Node": {
+    "message": "Pacchetto per Node",
+    "description": "Navbar item with label Package for Node"
+  },
+  "item.label.Package for Go": {
+    "message": "Pacchetto per Go",
+    "description": "Navbar item with label Package for Go"
+  }
+}

@@ -1,0 +1,23 @@
+import React from 'react';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import Admonition from '@theme/Admonition';
+import GitClone from '/SHARED/codeBlocks/gitClone.mdx';
+
+export default function GetPackageSource({ title, root }) {
+  return (
+    <Admonition type="info" title={title}>
+      <Tabs>
+        <TabItem value="http" label="HTTP">
+          <GitClone root={root} mode="HTTP" />
+        </TabItem>
+        <TabItem value="ssh" label="SSH">
+          <GitClone root={root} mode="SSH" />
+        </TabItem>
+        <TabItem value="cli" label="GitHub CLI">
+          <GitClone root={root} mode="CLI" />
+        </TabItem>
+      </Tabs>
+    </Admonition>
+  );
+}

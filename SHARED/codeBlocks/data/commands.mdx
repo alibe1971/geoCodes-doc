@@ -1,0 +1,30 @@
+import React from 'react';
+import TerminalWindow from '@site/src/components/TerminalWindow';
+import CodeBlock from '@theme/CodeBlock';
+
+export default function GitClone({ cmd, titleTerminal }) {
+  let command = '';
+
+  switch (cmd) {
+    case 'START':
+      command = 'npm start';
+      break;
+    case 'BUILD':
+      command = 'npm run build';
+      break;
+    case 'LINT':
+      command = 'npm run lint';
+      break;
+    case 'TEST':
+      command = 'npm run test';
+      break;
+    default:
+      command = '# ONLY: START, BUILD, LINT, TEST';
+  }
+
+  return (
+    <TerminalWindow promptStyle="bash" title={`${titleTerminal} ${cmd}`} titleShadow={true}>
+      <CodeBlock language="bash">{command}</CodeBlock>
+    </TerminalWindow>
+  );
+}

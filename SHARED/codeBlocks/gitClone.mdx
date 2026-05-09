@@ -1,0 +1,27 @@
+import React from 'react';
+import TerminalWindow from '@site/src/components/TerminalWindow';
+import CodeBlock from '@theme/CodeBlock';
+
+export default function GitClone({ mode, root }) {
+  let command = '';
+
+  switch (mode) {
+    case 'HTTP':
+      command = 'git clone https://github.com/alibe1971/' + root +'-geoCodes.git';
+      break;
+    case 'SSH':
+      command = 'git clone git@github.com:alibe1971/' + root +'-geoCodes.git';
+      break;
+    case 'CLI':
+      command = 'gh repo clone alibe1971/' + root +'-geoCodes';
+      break;
+    default:
+      command = '# ONLY: HTTP, SSH o CLI';
+  }
+
+  return (
+    <TerminalWindow promptStyle="bash" title={`Git Clone - ${mode}`} titleShadow={true}>
+      <CodeBlock language="bash">{command}</CodeBlock>
+    </TerminalWindow>
+  );
+}
