@@ -4,15 +4,17 @@
   "exportDataDirs": {
     "json":[],
 
-    "xml":[],
-
-    "yaml":[],
-
     "go":[],
 
     "node":[],
 
-    "php":[]
+    "php":[],
+
+    "xml":[],
+
+    "yaml":[],
+
+    "xsd":[]
   }
 }
 ```

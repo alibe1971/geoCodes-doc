@@ -7,13 +7,13 @@ export default function GitClone({ mode, root }) {
 
   switch (mode) {
     case 'HTTP':
-      command = 'git clone https://github.com/alibe1971/' + root +'-geoCodes.git';
+      command = 'git clone https://github.com/alibe1971/geoCodes-' + root +'.git';
       break;
     case 'SSH':
-      command = 'git clone git@github.com:alibe1971/' + root +'-geoCodes.git';
+      command = 'git clone git@github.com:alibe1971/geoCodes-' + root +'.git';
       break;
     case 'CLI':
-      command = 'gh repo clone alibe1971/' + root +'-geoCodes';
+      command = 'gh repo clone alibe1971/geoCodes-' + root;
       break;
     default:
       command = '# ONLY: HTTP, SSH o CLI';

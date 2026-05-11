@@ -5,7 +5,7 @@ import TerminalWindow from '@site/src/components/TerminalWindow';
 ```
 
 ```bash 
-cd data-geoCodes
+cd geoCodes-data
 npm install
 ```
 

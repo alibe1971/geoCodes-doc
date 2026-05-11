@@ -16,7 +16,7 @@ In altre parole questa non è una vera e propria applicazione del progetto, ma l
 
 ## Codice sorgente del pacchetto
 
-**<i class="fa-brands fa-github"></i> GitHub: https://github.com/alibe1971/data-geocodes**
+**<i class="fa-brands fa-github"></i> GitHub: https://github.com/alibe1971/geocodes-data**
 
 import GetPackageSource from '/SHARED/codeBlocks/getPackageSource.mdx'
 import PackageInitialization from '/SHARED/codeBlocks/data/packageInitialization.md'
@@ -76,7 +76,10 @@ In essa sono definiti i file pronti per essere utilizzati nei pacchetti del prog
 - json (contiene anche versioni minimizzate)
 - node
 - php
-- xml (contiene anche versioni minimizzate ed i relativi schemi XSD)
+- xml (contiene anche versioni minimizzate)
+- xsd: contiene le definizioni dei file xml
+  - origin: relative al dataset di origine
+  - contracts: relative agli oggetti in output nelle applicazioni
 - yaml
 
 #### La sottocartella `origin`
@@ -86,9 +89,19 @@ Contiene i dati primari (che analizzeremo in un apposito capitolo), che possono 
 Una volta effettuate le modifiche, sarà sufficiente lanciare il comando di compilazione per avere la cartella `built` aggiornata.
 
 
-## Il file `buildConfig.json`
+## I file `buildConfig*.json`
 
-Particolare attenzione richiede il file `buildConfig.json`, la cui utilità è data dal fatto che in esso sono contenute le istruzioni per l'esecuzione del programma `build` (vedi il paragrafo relativo ai comandi) ed in particolare:
+Particolare attenzione richiede la configurazione di build, usata dal programma `build.js`.
+
+Il caricamento avviene in questo ordine:
+
+1. `buildConfig.example.json`: file di esempio; nel codice viene comunque usato come base iniziale del merge.
+2. `buildConfig.json`: override condiviso (fallback).
+3. `buildConfig.local.json`: override locale finale (priorità più alta), pensato per la build locale dell'app.
+
+`buildConfig.local.json` è opzionale e non è generato automaticamente: va creato manualmente quando serve una configurazione locale dedicata (tipicamente copiando `buildConfig.example.json` e adattandolo).
+
+In tali file sono contenute le istruzioni per l'esecuzione del programma `build` (vedi il paragrafo relativo ai comandi) e in particolare:
 - il formato della bandiera per l'oggetto country (`flagsSvgFormat`);
 - i percorsi per esportare i dati della cartella `built` anche in un percorso locale manualmente definito (`exportDataDirs`).
 
@@ -131,10 +144,12 @@ Ad esempio.
 
 In questo caso ho
 - due cartelle per il pacchetto `json`
-- una cartella per i pacchetti `php`, `go`, `xml`
+- una cartella per i pacchetti `php`, `go`, `xml`, `xsd`
 - nessuna cartella per il pacchetto `yaml` e `node`
 
 Lanciando il comando per costruire il dataset il programma esporterà i dati nelle cartelle definite.
+
+**Nota pratica**: per uso applicativo locale conviene definire i percorsi in `buildConfig.local.json`, così da non alterare la configurazione condivisa.
 
 Non è importante se al termine del percorso è presente il `/`.
 
@@ -184,7 +199,7 @@ import Commands from '/SHARED/codeBlocks/data/commands.mdx'
     </TabItem>
     <TabItem value="lint" label="LINT">
     <Commands cmd="LINT" titleTerminal="Comando" />
-    Il comando **`lint`** controlla tutte le librerie per l'esecuzione del programma.
+    Il comando **`lint`** esegue il controllo del codice del repository con `eslint` (con auto-fix dove possibile).
 
     È utile qualora vi siano modifiche sugli script di esecuzione.
     </TabItem>
@@ -192,7 +207,7 @@ import Commands from '/SHARED/codeBlocks/data/commands.mdx'
     <Commands cmd="BUILD" titleTerminal="Comando" />
     Il comando **`build`** è il comando principale che costruisce il dataset per gli altri pacchetti.
 
-    Una volta lanciato la cartella `built` e le cartelle di esportazione definite in `buildConfig.json` sono sostituite con i nuovi contenuti.
+    Una volta lanciato la cartella `built` e le cartelle di esportazione definite nella configurazione di build (con priorità a `buildConfig.local.json`) sono sostituite con i nuovi contenuti.
 :::danger[Attenzione!!!]
 Tutti i dati nelle cartelle di esportazione verranno cancellati e sostituiti da quelli nuovi.
 :::
@@ -210,10 +225,6 @@ In generale si consiglia di utilizzare sempre il comando `npm start`, al fine di
     </TabItem>
 </Tabs>
 ::::::
-
-
-
-
 
 
 

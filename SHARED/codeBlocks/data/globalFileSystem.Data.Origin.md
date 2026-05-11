@@ -8,9 +8,9 @@
 │    	│   └── Countries
 │    	│       ⋮
 │    	│       ├── ie
-│    	│       │   ├── 1x1.svg
-│    	│       │   ├── 4x3.svg
-│    	│       │   └── 10x7.svg
+│    	│       │   ├── flag_1x1.svg
+│    	│       │   ├── flag_4x3.svg
+│    	│       │   └── flag_10x7.svg
 │    	│       ⋮
 │    	├── Translations
 │    	│   ⋮
@@ -20,18 +20,23 @@
 │    	│   │   │   ├── geoSets.json
 │    	│   │   │   ├── languages.json
 │    	│   │   │   └── scripts.json
-│    	│   │   ├── ccAcronymsAliasFormer.json
-│    	│   │   ├── ccAdjectives.json
-│    	│   │   ├── ccDemonyms.json
-│    	│   │   ├── ccNameCommon.json
-│    	│   │   ├── ccNameFull.json
-│    	│   │   ├── ccOthers.json
-│    	│   │   ├── ccTypos.json
+│    	│   │   ├── countries.json
 │    	│   │   ├── currencies.json
 │    	│   │   ├── geoSets.json
 │    	│   │   ├── languages.json
 │    	│   │   └── scripts.json
 │    	│   ⋮
+│    	├── XsdContracts
+│    	│   ├── countries.xsd
+│    	│   ├── country.xsd
+│    	│   ├── currencies.xsd
+│    	│   ├── currency.xsd
+│    	│   ├── geoSet.xsd
+│    	│   ├── geoSets.xsd
+│    	│   ├── language.xsd
+│    	│   ├── languages.xsd
+│    	│   ├── script.xsd
+│    	│   └── scripts.xsd
 │    	├── config.json
 │    	├── countries.json
 │    	├── currencies.json

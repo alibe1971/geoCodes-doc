@@ -252,7 +252,7 @@ Se dovesse essere inserita manualmente nel file di origine la proprietà `svg`, 
 
 ### La proprietà `dependency`
 
-Indica - se presente e non nulla - l'eventuale dipendenza politica da un altro stato.
+Indica - se presente e non nulla - l'eventuale dipendenza politica da un altro oggetto del dataset `countries`.
 
 Nel nostro esempio non esistono dipendenze.
 

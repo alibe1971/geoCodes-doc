@@ -27,7 +27,11 @@ Le proprietà che abbiamo definito "statiche" nel precedente capitolo si trovano
 
 Anche le bandiere SVG in `Data/origin/Flags/Countries` possono considerarsi parte delle proprietà statiche, in quanto verranno inserite in una proprietà dell'oggetto finale **countries**.
 
-Le sottocartelle (ed i relativi file in esse) nel percorso `Data/origin/Translations/` definiscono le lingue per le proprietà **dinamiche**.
+La sottocartella (e i relativi file in esse) nel percorso `Data/origin/Translations/` definiscono le lingue per le proprietà **dinamiche**.
+
+La sottocartella `Data/origin/XsdContracts/` contiene i contratti XSD che verranno utilizzati dalla app per validare i dati di output.
+Infatti vedremo come le singole app potranno avere un output in formato XML; questi xsd sono quelli che verranno utilizzati per validare tale output.
+
 
 
 Vediamo ora nel dettaglio tutte le proprietà, file per file.
