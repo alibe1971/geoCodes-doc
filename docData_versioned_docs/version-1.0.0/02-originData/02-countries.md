@@ -220,6 +220,9 @@ La proprietà `flags.emoji` contiene la bandiera dello stato nel formato emoji c
 
 :::
 
+<a id="afghanistan-flags-case"></a>
+##### Caso Afghanistan: differenza tra emoji e svg
+
 :::caution Il caso dell'Afghanistan
 Nel caso dell'Afghanistan è presente una mancata equivalenza tra il formato `emoji` e quello `svg`.
 
@@ -683,7 +686,73 @@ All'interno dell'array, ogni valore deve rispettare dei requisiti.
 
 ### La proprietà `languages`  
 
-[TODO]
+Il contenitore `languages` descrive lo stato linguistico del paese, distinguendo tra ufficialità normativa, uso effettivo e diffusione sociolinguistica.
+
+Nel nostro esempio:
+
+import LanguagesExample from '/SHARED/codeBlocks/data/origin/countries.languages.md'
+
+<LanguagesExample />
+
+:::note Requisiti
+
+| Regola | Definizione | Livello di controllo |
+|-----------|-----------|-----------|
+| Presenza obbligatoria | Sì | Build |
+| Tipo | Oggetto non vuoto | Build |
+
+:::
+
+#### Le proprietà interne a `languages`
+
+Le proprietà sono:
+- `official`: oggetto contenente le lingue ufficiali;
+- `regional`: array delle lingue regionali riconosciute;
+- `widelySpoken`: array delle lingue ampiamente parlate anche senza status ufficiale;
+- `localCommunities`: array delle lingue di comunità locali significative;
+- `extraTerritorialCommunities`: array delle lingue usate da comunità non autoctone stabilmente presenti;
+- `signs`: oggetto relativo alle lingue dei segni;
+- `dialects`: array dei codici dialettali rilevanti.
+
+:::note Requisiti per `official` e `signs`
+
+| Regola | Definizione | Livello di controllo |
+|-----------|-----------|-----------|
+| Tipo | Oggetto | Build |
+| Presenza obbligatoria | Sì | Build |
+
+**Il programma di build:**
+- se la proprietà non è presente, la inserisce come oggetto con le relative chiavi interne valorizzate ad array vuoti.
+
+:::
+
+Le proprietà interne di `official` sono:
+- `official.deJure`: lingue ufficiali per norma costituzionale/legislativa;
+- `official.deFacto`: lingue ufficiali per uso istituzionale consolidato.
+
+Le proprietà interne di `signs` sono:
+- `signs.deJure`: lingue dei segni con riconoscimento normativo;
+- `signs.recognized`: lingue dei segni riconosciute formalmente;
+- `signs.used`: lingue dei segni usate in modo documentato.
+
+:::note Requisiti per gli array linguistici
+
+Gli array linguistici comprendono:
+- `official.deJure`, `official.deFacto`
+- `regional`, `widelySpoken`, `localCommunities`, `extraTerritorialCommunities`
+- `signs.deJure`, `signs.recognized`, `signs.used`
+- `dialects`
+
+| Regola | Definizione | Livello di controllo |
+|-----------|-----------|-----------|
+| Tipo | Array (anche vuoto) | Build |
+| Elementi | Codici lingua/script validi | Build |
+| Sensibilità maiuscole/minuscole | No |  |
+| Duplicati nella stessa categoria | Rimossi | Build |
+
+Per i codici degli elementi si applicano le stesse regole già viste per i codici lingua.
+
+:::
 
 
 ### La proprietà `localesIcu`
@@ -738,11 +807,40 @@ import OtherAppIds from '/SHARED/codeBlocks/data/origin/countries.otherappsids.m
 
 <OtherAppIds />
 
-In questa versione sono presenti solo gli identificativi per l'applicazione [geonames.org](https://www.geonames.org/)
+In questa versione sono presenti i seguenti identificativi esterni:
+- `geoNamesOrg` (GeoNames)
+- `wikiData` (Wikidata)
+- `openStreetMapRelation` (OpenStreetMap)
 
 #### La proprietà `geoNamesOrg`
 
 La proprietà riporta l'identificativo univoco relativo all'applicazione esterna [geonames.org](https://www.geonames.org/).
+
+:::note Requisiti
+
+| Regola | Definizione | Livello di controllo |
+|-----------|-----------|-----------|
+| Tipo | Intero positivo | Build |
+| Presenza obbligatoria | Sì | Build |
+
+:::
+
+#### La proprietà `wikiData`
+
+La proprietà riporta l'identificativo univoco del paese su [Wikidata](https://www.wikidata.org/) (formato tipico `Q...`).
+
+:::note Requisiti
+
+| Regola | Definizione | Livello di controllo |
+|-----------|-----------|-----------|
+| Tipo | Stringa non vuota | Build |
+| Presenza obbligatoria | Sì | Build |
+
+:::
+
+#### La proprietà `openStreetMapRelation`
+
+La proprietà riporta l'identificativo numerico della relazione amministrativa principale del paese su [OpenStreetMap](https://www.openstreetmap.org/).
 
 :::note Requisiti
 

@@ -7,13 +7,80 @@ sidebar_position: 1
 
 # La cartella delle traduzioni
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ullamcorper nec sapien ut scelerisque. Nam lacinia ante et metus lacinia dapibus. Vestibulum volutpat nunc eu mauris sollicitudin sagittis. Etiam porttitor erat et mi varius convallis. Sed imperdiet ligula at est scelerisque, sit amet vulputate dolor ullamcorper. Nunc sagittis felis eu urna vehicula luctus. Vestibulum interdum magna at efficitur vehicula. Vivamus hendrerit enim eu ipsum mollis hendrerit. Proin venenatis consequat erat non efficitur. Donec vitae nisi odio. Nam tempus auctor cursus. Donec quam dolor, accumsan at finibus vitae, facilisis sit amet massa. Ut placerat auctor justo posuere sollicitudin. Suspendisse malesuada a neque ac consectetur. Nam tempor nibh vel urna fermentum, quis pulvinar risus venenatis. Proin vitae nunc vulputate, fermentum odio id, sollicitudin nulla.
+import TranslationsTree from '/SHARED/codeBlocks/data/origin/translations.tree.md'
 
-Mauris maximus sem vitae eros fermentum fermentum. Maecenas sed enim convallis, convallis nisi in, feugiat neque. Donec placerat vulputate ex at pharetra. In hac habitasse platea dictumst. Nunc porttitor vestibulum blandit. Fusce felis tellus, commodo sed scelerisque ut, euismod vel felis. Vivamus gravida ipsum felis, eu volutpat ipsum lacinia sit amet. Nam at ipsum quis nibh faucibus fringilla. Vestibulum quam mauris, scelerisque sit amet lacus ut, rhoncus consequat dui. Sed ac est eros. Cras molestie dui eget nibh semper iaculis. In pretium nisl magna, at vestibulum erat auctor vitae. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+## Ruolo della cartella `Data/origin/Translations`
 
-Quisque vel tincidunt tellus. Praesent tristique bibendum tortor, eget scelerisque felis rhoncus ut. Pellentesque vulputate eu purus id dictum. Nunc maximus mi erat, ac aliquam sem sagittis id. Ut non venenatis massa. Sed sed ultrices erat. Praesent turpis neque, auctor vel velit id, congue cursus mauris. Nullam eu neque at metus commodo commodo eu id metus. Etiam eu leo vulputate, tristique ex vitae, aliquam nisi. Sed ullamcorper nisl vel ante luctus, iaculis auctor enim porta. Phasellus auctor quam luctus ligula ornare faucibus. Mauris scelerisque rhoncus lectus in malesuada. Fusce accumsan tempus augue, a porta arcu porttitor ut. Proin tellus sem, congue non mi quis, consequat dictum urna.
+La cartella `Translations` contiene i contenuti testuali localizzati che vengono associati agli oggetti principali del dataset:
+- `countries`
+- `currencies`
+- `geoSets`
+- `languages`
+- `scripts`
 
-Ut non ipsum ligula. Integer quis ligula at lacus imperdiet fermentum. Cras tempus, dui a fermentum aliquam, ipsum quam pulvinar magna, interdum feugiat nibh libero et est. Vivamus libero risus, convallis sed nisl maximus, blandit accumsan leo. Morbi interdum placerat sapien id semper. Sed ullamcorper, est sit amet molestie tempor, leo tortor ultricies ligula, eu posuere arcu purus ac nunc. Etiam at enim iaculis, vehicula tortor eu, vehicula enim. Donec convallis nunc non dictum laoreet. Nulla facilisi. Cras erat turpis, consectetur ut hendrerit at, bibendum egestas nisl.
+Struttura sintetica di riferimento:
 
-Sed sed vestibulum leo. Suspendisse posuere, purus sit amet ornare tincidunt, neque nulla viverra sapien, sit amet ullamcorper massa tortor nec magna. Vivamus purus velit, pellentesque id lacus quis, lacinia volutpat ante. Curabitur fermentum dignissim sodales. Integer vel est eget justo laoreet feugiat ac vel mi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis at tellus auctor, mollis tortor vel, cursus lectus. Maecenas convallis interdum mi sed cursus. Integer eleifend tristique risus, at varius lectus imperdiet id. Proin vitae purus volutpat, ultricies enim eget, tristique arcu. Nam a ullamcorper metus, non mattis ex. Nam vel eros sed nisl fringilla gravida vitae nec neque. Nullam tempus mi at metus interdum vehicula.
+<TranslationsTree />
 
+In fase di build, queste traduzioni non sono opzionali per la lingua di default: sono parte integrante del contratto dati delle app.
+
+## Relazione diretta con `config.json`
+
+Il comportamento della cartella `Translations` è governato dal file di configurazione, in particolare da:
+- `settings.languages.inPackage`
+- `settings.languages.default`
+
+Riferimento: [Il file `config.json`](../01-config.md).
+
+In pratica:
+1. il build legge solo le lingue dichiarate in `inPackage`;
+2. per ogni lingua dichiarata, si aspetta la cartella corrispondente in `Data/origin/Translations/<lang>/`;
+3. se una cartella lingua non esiste ma la lingua è in `inPackage`, il build fallisce;
+4. se una cartella lingua esiste ma la lingua non è in `inPackage`, quella cartella è ignorata.
+
+Questa regola è coerente anche con l’uso nelle app consumer. Nel package PHP, ad esempio, le lingue disponibili sono lette dalla configurazione dati (`src/Data/config.php`) e non dall’enumerazione fisica delle cartelle.
+
+## Struttura generale
+
+Per ogni lingua, la struttura minima è:
+
+- `Data/origin/Translations/<lang>/countries.json`
+- `Data/origin/Translations/<lang>/currencies.json`
+- `Data/origin/Translations/<lang>/geoSets.json`
+- `Data/origin/Translations/<lang>/languages.json`
+- `Data/origin/Translations/<lang>/scripts.json`
+
+Inoltre, per i dataset che hanno traduzioni di categorie, è presente:
+
+- `Data/origin/Translations/<lang>/Categories/...`
+
+Le categorie tradotte attualmente riguardano:
+- `currencies` (`scope`)
+- `geoSets` (`scope`)
+- `languages` (`scope`, `type`)
+- `scripts` (`writingDirection`)
+
+Per `countries`, invece, non è previsto un file in `Categories`: la gestione è specifica e descritta nel capitolo dedicato.
+
+## Come vengono usate nelle app
+
+Le app non consumano “file di traduzione” come blocchi separati da mostrare direttamente.
+Consumano un dataset strutturato dove:
+- i dati statici restano nella collezione principale;
+- le traduzioni entrano in mappe per lingua;
+- i fallback sono pilotati dalla lingua di default.
+
+Il punto chiave è che il sistema è **configuration-driven**: la scelta delle lingue utili è nel `config`, non nella presenza casuale di cartelle.
+
+Ne deriva una regola operativa semplice:
+- mantenere allineati `inPackage` e cartelle reali;
+- mantenere completa la lingua di default;
+- considerare irrilevanti (finché non aggiunte in `inPackage`) eventuali cartelle extra.
+
+## Distinzione importante tra `countries` e altri dataset
+
+Il dataset `countries` applica una pipeline traduzioni più articolata (proprietà multiple e normalizzazioni aggiuntive), mentre gli altri dataset seguono una struttura traduttiva più semplice e lineare.
+
+Dettaglio nei capitoli successivi:
+- [I file per gli oggetti "countries"](./01-countries.md)
+- [I file per gli altri oggetti](./02-others.md)

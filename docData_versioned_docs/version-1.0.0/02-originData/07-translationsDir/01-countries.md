@@ -6,13 +6,67 @@ sidebar_label: I file per gli oggetti "countries"
 
 # I file per gli oggetti "countries"
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ullamcorper nec sapien ut scelerisque. Nam lacinia ante et metus lacinia dapibus. Vestibulum volutpat nunc eu mauris sollicitudin sagittis. Etiam porttitor erat et mi varius convallis. Sed imperdiet ligula at est scelerisque, sit amet vulputate dolor ullamcorper. Nunc sagittis felis eu urna vehicula luctus. Vestibulum interdum magna at efficitur vehicula. Vivamus hendrerit enim eu ipsum mollis hendrerit. Proin venenatis consequat erat non efficitur. Donec vitae nisi odio. Nam tempus auctor cursus. Donec quam dolor, accumsan at finibus vitae, facilisis sit amet massa. Ut placerat auctor justo posuere sollicitudin. Suspendisse malesuada a neque ac consectetur. Nam tempor nibh vel urna fermentum, quis pulvinar risus venenatis. Proin vitae nunc vulputate, fermentum odio id, sollicitudin nulla.
+import CountriesTranslationsExample from '/SHARED/codeBlocks/data/origin/translations.countries.sample.md'
 
-Mauris maximus sem vitae eros fermentum fermentum. Maecenas sed enim convallis, convallis nisi in, feugiat neque. Donec placerat vulputate ex at pharetra. In hac habitasse platea dictumst. Nunc porttitor vestibulum blandit. Fusce felis tellus, commodo sed scelerisque ut, euismod vel felis. Vivamus gravida ipsum felis, eu volutpat ipsum lacinia sit amet. Nam at ipsum quis nibh faucibus fringilla. Vestibulum quam mauris, scelerisque sit amet lacus ut, rhoncus consequat dui. Sed ac est eros. Cras molestie dui eget nibh semper iaculis. In pretium nisl magna, at vestibulum erat auctor vitae. Interdum et malesuada fames ac ante ipsum primis in faucibus.
+## Perché `countries` è diverso dagli altri
 
-Quisque vel tincidunt tellus. Praesent tristique bibendum tortor, eget scelerisque felis rhoncus ut. Pellentesque vulputate eu purus id dictum. Nunc maximus mi erat, ac aliquam sem sagittis id. Ut non venenatis massa. Sed sed ultrices erat. Praesent turpis neque, auctor vel velit id, congue cursus mauris. Nullam eu neque at metus commodo commodo eu id metus. Etiam eu leo vulputate, tristique ex vitae, aliquam nisi. Sed ullamcorper nisl vel ante luctus, iaculis auctor enim porta. Phasellus auctor quam luctus ligula ornare faucibus. Mauris scelerisque rhoncus lectus in malesuada. Fusce accumsan tempus augue, a porta arcu porttitor ut. Proin tellus sem, congue non mi quis, consequat dictum urna.
+Tra tutte le collezioni, `countries` è quella con la semantica traduttiva più ricca.
+Non si limita ad una proprietà `name`, ma combina più elementi che poi vengono usati dalle app per ricerca e presentazione.
 
-Ut non ipsum ligula. Integer quis ligula at lacus imperdiet fermentum. Cras tempus, dui a fermentum aliquam, ipsum quam pulvinar magna, interdum feugiat nibh libero et est. Vivamus libero risus, convallis sed nisl maximus, blandit accumsan leo. Morbi interdum placerat sapien id semper. Sed ullamcorper, est sit amet molestie tempor, leo tortor ultricies ligula, eu posuere arcu purus ac nunc. Etiam at enim iaculis, vehicula tortor eu, vehicula enim. Donec convallis nunc non dictum laoreet. Nulla facilisi. Cras erat turpis, consectetur ut hendrerit at, bibendum egestas nisl.
+In ogni lingua (`Data/origin/Translations/<lang>/countries.json`) le traduzioni sono indicizzate per codice paese (`alpha2`) e includono, in sintesi:
+- `name` (obbligatorio, in particolare per la lingua di default)
+- `fullName` (obbligatorio, in particolare per la lingua di default)
+- liste opzionali come `demonyms`, `acronymsAliasFormer`, `adjectives`, `others`, `typos`
 
-Sed sed vestibulum leo. Suspendisse posuere, purus sit amet ornare tincidunt, neque nulla viverra sapien, sit amet ullamcorper massa tortor nec magna. Vivamus purus velit, pellentesque id lacus quis, lacinia volutpat ante. Curabitur fermentum dignissim sodales. Integer vel est eget justo laoreet feugiat ac vel mi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Duis at tellus auctor, mollis tortor vel, cursus lectus. Maecenas convallis interdum mi sed cursus. Integer eleifend tristique risus, at varius lectus imperdiet id. Proin vitae purus volutpat, ultricies enim eget, tristique arcu. Nam a ullamcorper metus, non mattis ex. Nam vel eros sed nisl fringilla gravida vitae nec neque. Nullam tempus mi at metus interdum vehicula.
+In altre parole, la chiave del file traduzioni deve corrispondere alla chiave primaria del dataset statico `countries` (`alpha2`).
 
+Esempio sintetico:
+
+<CountriesTranslationsExample />
+
+## Meccanismo di costruzione
+
+Durante il build, per ogni lingua in `settings.languages.inPackage`, il parser `countries`:
+1. valida i campi obbligatori (`name`, `fullName`) con regole più stringenti per la lingua di default;
+2. carica gli array opzionali se presenti;
+3. costruisce una proprietà derivata `keywords` aggregando i termini degli array opzionali;
+4. applica normalizzazioni (slug/lowercase, deduplica, esclusione dei termini già presenti in `name`, `fullName`, `demonyms`).
+
+Quindi il “merge” non è un merge strutturale tra file diversi, ma una composizione semantica di campi sorgente in un output traduttivo unico e più utile alle query applicative.
+
+## Comportamento build: lingua default vs altre lingue
+
+Per `countries` il comportamento è esplicito:
+
+- **Lingua di default** (`settings.languages.default`):
+  - `name` e `fullName` sono obbligatori e non possono essere null/vuoti;
+  - se mancano, il build termina con errore.
+- **Lingue non default**:
+  - `name` e `fullName` possono mancare/null;
+  - il build valorizza stringa vuota e delega il fallback alle regole applicative.
+- **Array opzionali** (`demonyms`, `acronymsAliasFormer`, `adjectives`, `others`, `typos`):
+  - se mancanti, diventano array vuoti;
+  - contribuiscono alla costruzione di `keywords` solo se presenti e validi.
+
+## Impatto applicativo
+
+Questo approccio rende `countries` adatto a:
+- ricerca testuale robusta (sinonimi, varianti, typo note);
+- visualizzazione con fallback coerente (`name`/`fullName`);
+- consistenza tra lingua attiva e lingua di default.
+
+Per questo dataset, una traduzione incompleta non è solo un difetto editoriale: può produrre impatti evidenti su lookup e UX.
+
+## Relazione con `config.languages`
+
+Anche per `countries` valgono le regole generali:
+- la lingua deve essere presente in `inPackage` per essere inclusa nel built;
+- una cartella lingua non referenziata in `inPackage` viene ignorata;
+- la lingua di default deve essere completa sui campi obbligatori.
+
+Riferimento: [Il file `config.json`](../01-config.md).
+
+## Nota operativa
+
+Poiché `countries` usa più campi come sorgente lessicale, conviene mantenere allineate le proprietà opzionali tra lingue principali.
+Non è obbligatorio avere la stessa ricchezza lessicale in tutte le lingue, ma una forte asimmetria riduce l’efficacia di ricerca locale.

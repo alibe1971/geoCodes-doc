@@ -133,10 +133,48 @@ import UnM49euN from '/SHARED/codeBlocks/data/origin/geosets.unm49geogeuno.md'
 |-----------|-----------|-----------|
 | Presenza obbligatoria | Sì (solo nel caso di macro raggruppamenti di tipo geografico, `GEOG-`) | Build |
 | Tipo | **Nel caso di macro raggruppamenti geografici (`GEOG-`)**: stringa di tre caratteri numerici o numero intero positivo con un massimo di tre cifre.<br />**Negli altri casi**: valore nullo. | Build |
-| Unicità | Sì<br />Il controllo di unicità viene effettuato anche sulla proprietà `unM49` dei paesi, presenti nel file `countries.conf` | Test [TODO] |
+| Unicità | Sì<br />Il controllo di unicità viene effettuato anche sulla proprietà `unM49` dei paesi, presenti nel file `countries.json` | Test [TODO] |
 
 **Il programma di build:**
 - per i macro raggruppamenti di tipo geografico (`GEOG-`), trasforma il valore in stringa (se già non lo è) preponendo tanti `0` quanti necessari a raggiungere la lunghezza complessiva di tre cifre.
+
+:::
+
+### La proprietà `scope`
+
+La proprietà `scope` identifica la tipologia del raggruppamento in forma esplicita.
+
+Nel nostro esempio:
+
+import Scope from '/SHARED/codeBlocks/data/origin/geosets.scope.md'
+
+<Scope />
+
+I valori ammessi sono:
+- `GEOG`: raggruppamenti geografici;
+- `CONV`: raggruppamenti convenzionali;
+- `ORGS`: organizzazioni geopolitiche.
+
+Il valore deve sempre essere coerente con il prefisso di `internalCode`.
+
+Esempi:
+- `internalCode: GEOG-EU` -> `scope: GEOG`
+- `internalCode: CONV-G7` -> `scope: CONV`
+- `internalCode: ORGS-UN` -> `scope: ORGS`
+
+:::note Requisiti
+
+| Regola | Definizione | Livello di controllo |
+|-----------|-----------|-----------|
+| Presenza obbligatoria | Sì | Build |
+| Tipo | Stringa (`GEOG`, `CONV`, `ORGS`) | Build |
+| Coerenza con `internalCode` | Sì (deve coincidere col primo segmento prima del `-`) | Build |
+| Sensibilità delle maiuscole/minuscole | No |  |
+
+**Il programma di build:**
+- trasforma il valore in lettere maiuscole;
+- valida il valore rispetto all'insieme ammesso;
+- verifica la corrispondenza con il prefisso di `internalCode`.
 
 :::
 
@@ -198,7 +236,7 @@ import CountryCodes from '/SHARED/codeBlocks/data/origin/geosets.countrycodes.md
 
 :::
 
-#### I valori interni a `tags`
+#### I valori interni a `countryCodes`
 
 :::note Requisiti
 

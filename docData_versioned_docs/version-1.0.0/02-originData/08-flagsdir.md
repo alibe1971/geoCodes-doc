@@ -1,6 +1,6 @@
 ---
 slug: /originData/flags
-sidebar_position: 8
+sidebar_position: 9
 sidebar_label: La cartella `Flags`
 ---
 
@@ -21,7 +21,7 @@ All'interno della cartella `Countries` vi è la lista delle cartelle dei paesi, 
 - 4x3.svg;
 - 10x7.svg.
 
-Nella costruzione del dataset finale, viene usato solo un formato, che può essere scelto nel file `buildConfig.json`.
+Nella costruzione del dataset finale, viene usato solo un formato, che può essere scelto nella configurazione di build, con override locale in `buildConfig.local.json` (come descritto nei capitoli precedenti).
 
 
 ## Qualche esempio
@@ -37,4 +37,4 @@ import FlagsExample from '/SHARED/codeBlocks/data/origin/flags.examples.md'
 
 <FlagsExample />
 
-
+Per il dettaglio della differenza tra bandiera emoji e svg nel caso afghano, vedi il riferimento nel capitolo dei paesi: [Caso Afghanistan: differenza tra emoji e svg](./countries#afghanistan-flags-case).

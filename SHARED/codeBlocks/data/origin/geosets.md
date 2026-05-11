@@ -8,6 +8,7 @@
       "LABEL": "European Union (EU)",
       "internalCode": "ORGS-EU",
       "unM49": null,
+      "scope": "ORGS",
       "tags": [
           "organization",
           "geopolitics"

@@ -10,6 +10,7 @@
       "isoNumber": "978",
       "symbol": "€",
       "decimal": 2,
+      "scope": "M",
       "NOTES": []
   },
   ⋮

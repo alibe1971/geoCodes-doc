@@ -133,6 +133,36 @@ import Decimal from '/SHARED/codeBlocks/data/origin/currencies.decimal.md'
 
 :::
 
+### La proprietà `scope`
+
+La proprietà `scope` identifica il tipo di valuta nel dataset.
+
+Nel nostro esempio
+
+import Scope from '/SHARED/codeBlocks/data/origin/currencies.scope.md'
+
+<Scope />
+
+I valori ammessi sono:
+- `M`: valuta monetaria corrente;
+- `F`: unità monetaria usata in ambito finanziario;
+- `P`: metallo prezioso codificato come valuta;
+- `S`: unità monetaria sovranazionale/speciale.
+
+:::note Requisiti
+
+| Regola | Definizione | Livello di controllo |
+|-----------|-----------|-----------|
+| Presenza obbligatoria | Sì | Build |
+| Tipo | Stringa (`M`, `F`, `P`, `S`) | Build |
+| Sensibilità delle maiuscole/minuscole | No |  |
+
+**Il programma di build:**
+- trasforma il valore in lettere maiuscole;
+- valida il valore rispetto all'insieme ammesso.
+
+:::
+
 ### La proprietà `NOTES`
 
 Questa è una proprietà di supporto nella redazione del file e non viene considerata nella costruzione del dataset finale.
