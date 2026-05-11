@@ -1,4 +1,4 @@
-```json title="Data/origin/Translations/en/countries.json"
+```js title="Data/origin/Translations/en/countries.json"
 {
   ...
   "IE": {

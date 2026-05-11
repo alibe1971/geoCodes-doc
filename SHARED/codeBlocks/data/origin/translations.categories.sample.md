@@ -1,4 +1,4 @@
-```json title="Data/origin/Translations/en/Categories/languages.json"
+```js title="Data/origin/Translations/en/Categories/languages.json"
 {
   "scope": {
     "I": "...",
